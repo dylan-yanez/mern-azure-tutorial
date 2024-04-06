@@ -1,0 +1,47 @@
+.search-result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Adjust the height as needed */
+  }
+  
+  .search-title {
+    margin-bottom: 20px;
+  }
+  
+.video-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Five columns */
+    grid-template-rows: repeat(3, auto); /* Three rows */
+    gap: 20px; /* Adjust the gap between videos */
+    justify-content: center; /* Center the grid horizontally */
+  }
+  
+  .video-card {
+    width: 100%; /* Occupy full width of the grid cell */
+    max-width: 200px; /* Maximum width of each video card */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .video-thumbnail {
+    width: 100%; /* Set the width to fill the container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure the image does not exceed its original size */
+    max-height: 100%; /* Ensure the image does not exceed its original size */
+  }
+  
+  .video-info {
+    padding: 10px;
+  }
+  
+  .video-title {
+    font-size: 16px;
+    margin: 10px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+    
