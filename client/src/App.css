@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.app-container {
+  display: flex;
+  height: 100vh; /* Ensure the container takes full height of the viewport */
+}
+
+.sidebar {
+  width: 200px; /* Adjust width as needed */
+  /* Add other styles for the sidebar */
+}
+
+.content-container {
+  flex: 1; /* Take remaining space */
+  margin-left: 200px; /* Set margin to match sidebar width when expanded */
+  transition: margin-left 0.3s ease; /* Add transition for smooth animation */
+}
+
+.sidebar.collapsed + .content-container {
+  margin-left: 50px; /* Adjust margin when sidebar is collapsed */
+}
+
+/* Additional styles as needed */

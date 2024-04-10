@@ -1,0 +1,55 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 200px; /* Adjust width as needed */
+  background-color: #333; /* Sidebar background color */
+  color: #fff; /* Text color */
+  overflow-y: auto; /* Allow scrolling if content exceeds height */
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 50px; /* Collapsed width */
+}
+
+.logo {
+  padding-top: 5px;
+  width: 150px;
+  height: 90px;
+}
+
+
+.nav-links li {
+  padding: 20px; /* Adjust the padding to increase spacing */
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li a {
+  color: #b700ff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li a svg {
+  margin-right: 10px; /* Add margin between icon and text */
+}
+
+.nav-links li:hover {
+  background-color: #ffffff60; /* Change the background color on hover */
+}
+
+.collapse-button {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}

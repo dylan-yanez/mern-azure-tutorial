@@ -2,8 +2,6 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom'; // Import Link
 import './Home.css'; // css file for styling
 
-import InputTodo from "./InputTodo";
-import ListTodos from "./ListTodos";
 import SearchTool from './SearchTool';
 
 const Home = () => {
@@ -29,10 +27,6 @@ const Home = () => {
           <p className="section-text">Explore a vast collection of songs from various genres. Create playlists, save your favorite tracks, and enjoy a seamless music listening experience.</p>
           <button className="cta-button">Get Started</button>
         </section>
-        <Fragment>
-          <InputTodo />
-          <ListTodos />
-        </Fragment>
       </main>
       <footer>
         <p className="footer-text">&copy; 2024 TuneVista. All rights reserved.</p>
