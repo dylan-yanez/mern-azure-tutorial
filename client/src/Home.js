@@ -11,10 +11,7 @@ const Home = () => {
         <h1 className="title">Welcome to TuneVista</h1>
         <nav>
           <ul className="nav-links">
-            <li><Link to="/">Home</Link></li> {/* Use Link instead of <a> */}
-            <li><Link to="/library">Library</Link></li> {/* Use Link instead of <a> */}
-            <li><Link to="/playlist">Playlists</Link></li> {/* Use Link instead of <a> */}
-            <li><Link to="/account">Account</Link></li> {/* Use Link instead of <a> */}
+
           </ul>
         </nav>
         <Fragment>
