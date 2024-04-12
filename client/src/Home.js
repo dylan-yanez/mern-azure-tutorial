@@ -20,7 +20,7 @@ const Home = () => {
       </header>
       <main>
         <section className="main-section">
-          <h2 className="section-heading">Discover and Enjoy Music</h2>
+          <h2 className="section-heading">Discover and Enjoy Music!</h2>
           <p className="section-text">Explore a vast collection of songs from various genres. Create playlists, save your favorite tracks, and enjoy a seamless music listening experience.</p>
           <button className="cta-button">Get Started</button>
         </section>
