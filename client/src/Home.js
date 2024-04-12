@@ -6,6 +6,7 @@ import SearchTool from './SearchTool';
 
 const Home = () => {
   return (
+    <div className="image-wrapper" >
     <div className="home-container">
       <header>
         <h1 className="title">Welcome to TuneVista</h1>
@@ -31,6 +32,7 @@ const Home = () => {
       <footer>
         <p className="footer-text">&copy; 2024 TuneVista. All rights reserved.</p>
       </footer>
+    </div>
     </div>
   );
 }

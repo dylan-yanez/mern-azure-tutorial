@@ -1,5 +1,7 @@
 /* Home.css */
-
+.image-wrapper{
+  background-image: url('../assets/waves.jpg');
+}
 /* Container styles */
 .home-container {
   max-width: 800px;
