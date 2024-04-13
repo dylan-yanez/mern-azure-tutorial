@@ -11,7 +11,7 @@
 }
 
 .sidebar.collapsed {
-  width: 50px; /* Collapsed width */
+  width: 20px; /* Collapsed width */
 }
 
 .logo {
@@ -43,9 +43,9 @@
 }
 
 .collapse-button {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
+  position: revert-layer;
+  bottom: 436px;
+  right: -93px;
   width: 100%;
   background-color: transparent;
   border: none;
