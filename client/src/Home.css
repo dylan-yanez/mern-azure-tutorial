@@ -18,7 +18,7 @@
   margin-bottom: 30px; /* Increase bottom margin */
   text-align: center; /* Align the text to the center */
   margin-top: 40px; /* Add margin at the top */
-  color: #333; /* Change text color */
+  color: white; /* Change text color */
 }
 
 /* Navigation styles */
@@ -46,20 +46,20 @@
 
 /* Main section styles */
 .main-section {
-  margin-top: 350px; /* Adjust the margin-top value to move it further down */
+  margin-top: 250px; /* Adjust the margin-top value to move it further down */
   text-align: center;
 }
 
 .section-heading {
   font-size: 2rem;
   margin-bottom: 20px; /* Increase bottom margin */
-  color: #333; /* Change text color */
+  color: white; /* Change text color */
 }
 
 .section-text {
   font-size: 1.2rem;
   margin-bottom: 30px; /* Increase bottom margin */
-  color: #666; /* Change text color */
+  color: white; /* Change text color */
 }
 
 .cta-button {
@@ -82,7 +82,6 @@ footer {
   margin-top: auto; /* Push footer to the bottom */
   text-align: center;
   padding: 20px 0; /* Add some padding for spacing */
-  background-color: #ffffff; /* Change background color */
 }
 
 .footer-text {
