@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Sidebar from './Sidebar';
 import Login from './Login';
+import Playlists from './Playlists';
+import Settings from './Settings';
 import NewUser from './NewUser';
 import SearchResult from './SearchResult';
 
@@ -24,6 +26,8 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchResult />} />
             <Route path="/profile" element={showNewUser ? <NewUser /> : <Login onSignUp={handleSignUp} />} />
+            <Route path="/playlists" element={<Playlists />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
       </div>
