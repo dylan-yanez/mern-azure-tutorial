@@ -25,11 +25,6 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/songs">
-             Songs
-          </Link>
-        </li>
-        <li>
           <Link to="/playlists">
              Playlists
           </Link>

@@ -1,0 +1,81 @@
+/* Home.css */
+.image-wrapper{
+    background-image: url('../assets/waves.jpg');
+  }
+  /* Container styles */
+  .home-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Set minimum height to full viewport height */
+  }
+  
+  /* Header styles */
+  .title {
+    font-size: 3rem; /* Increase font size */
+    margin-bottom: 30px; /* Increase bottom margin */
+    text-align: center; /* Align the text to the center */
+    margin-top: 40px; /* Add margin at the top */
+    color: white; /* Change text color */
+  }
+  
+  /* Navigation styles */
+  .nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Align the navigation links to the center */
+  }
+  
+  
+  .nav-links li a:hover {
+    color: #0056b3; /* Change link color on hover */
+  }
+  
+  /* Main section styles */
+  .main-section {
+    margin-top: 250px; /* Adjust the margin-top value to move it further down */
+    text-align: center;
+  }
+  
+  .section-heading {
+    font-size: 2rem;
+    margin-bottom: 20px; /* Increase bottom margin */
+    color: white; /* Change text color */
+  }
+  
+  .section-text {
+    font-size: 1.2rem;
+    margin-bottom: 30px; /* Increase bottom margin */
+    color: white; /* Change text color */
+  }
+  
+  .cta-button {
+    padding: 12px 24px; /* Increase padding */
+    font-size: 1.2rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Footer styles */
+  footer {
+    margin-top: auto; /* Push footer to the bottom */
+    text-align: center;
+    padding: 20px 0; /* Add some padding for spacing */
+  }
+  
+  .footer-text {
+    font-size: 0.8rem;
+    color: #666; /* Change text color */
+  }
+  
