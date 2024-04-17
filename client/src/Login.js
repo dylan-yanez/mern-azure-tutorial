@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, onSignUp }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,7 +11,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="login-wrapper">
+    <div className='login-wrapper'>
       <div className="login-container">
         <h2>Welcome Back!</h2>
         <form onSubmit={handleLogin}>
@@ -33,7 +33,7 @@ const Login = ({ onLogin }) => {
           </div>
           <button type="submit">Login</button>
         </form>
-        <p className="signup-link">Don't have an account? Sign up now!</p>
+        <p className="signup-link" onClick={onSignUp}>Don't have an account? Sign up now!</p> 
       </div>
     </div>
   );
