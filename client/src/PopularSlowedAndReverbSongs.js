@@ -8,7 +8,7 @@ const PopularSlowedAndReverbSongs = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/videos?query=Best_Slowed_And_Reverb`);
+        const response = await axios.get(`${baseUrl}/slowedandreverb`);
         setVideos(response.data.items); // Assuming response.data contains an 'items' array
       } catch (error) {
         console.error('Error fetching Slowed and Reverb songs:', error);

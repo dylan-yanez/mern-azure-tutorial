@@ -8,7 +8,7 @@ const PopularTikTokSongs = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/videos?query=BestSongsRightNow`);
+        const response = await axios.get(`${baseUrl}/tiktoksongs`);
         setVideos(response.data.items); // Assuming response.data contains an 'items' array
       } catch (error) {
         console.error('Error fetching TikTok songs:', error);
