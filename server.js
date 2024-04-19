@@ -24,6 +24,33 @@ app.get("/videos", async (req, res) => {
   }
 });
 
+// Route for fetching popular TikTok songs
+app.get("/tiktoksongs", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDW5Hsh46Vm10dY-IvCDLBtpBZaPNi30Q4&part=snippet&type=video&q=oneheart&maxResults=5`
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching TikTok songs:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Route for fetching popular slowed and reverb songs
+app.get("/slowedandreverb", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDW5Hsh46Vm10dY-IvCDLBtpBZaPNi30Q4&part=snippet&type=video&q=popular%20slowed%20and%20reverb%20songs&maxResults=5`
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching slowed and reverb songs:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
 app.use(express.static("./client/build"));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));

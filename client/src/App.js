@@ -1,6 +1,5 @@
 // App.js
-import React from 'react';
-import {useState} from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Sidebar from './Sidebar';
@@ -9,6 +8,7 @@ import Playlists from './Playlists';
 import Settings from './Settings';
 import NewUser from './NewUser';
 import SearchResult from './SearchResult';
+import VideoPlayerPage from './VideoPlayerPage';
 
 const App = () => {
   const [showNewUser, setShowNewUser] = useState(false);
@@ -19,15 +19,16 @@ const App = () => {
 
   return (
     <Router>
-      <div className="app-container"> {/* Add a container for positioning */}
+      <div className="app-container">
         <Sidebar />
-        <div className="content-container"> {/* Container for routes */}
+        <div className="content-container">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchResult />} />
-            <Route path="/profile" element={showNewUser ? <NewUser /> : <Login onSignUp={handleSignUp} />} />
+            <Route path="/profile" element={<Login onSignUp={handleSignUp} />} />
             <Route path="/playlists" element={<Playlists />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/video/:videoId" element={<VideoPlayerPage />} />
           </Routes>
         </div>
       </div>
