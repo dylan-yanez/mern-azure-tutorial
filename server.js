@@ -6,67 +6,10 @@ const port = process.env.PORT || 3001;
 const path = require('path');
 const axios = require("axios");
 
-//---------------------------------------things required for DB-----------------------------------------------------
-
-//connect,create table,insert data
-const pg = require('pg');
-
-
-const config = {
-    host: 'tunevistaserver.postgres.database.azure.com',
-    // Do not hard code your username and password.
-    // Consider using Node environment variables.
-    user: 'admin1',     
-    password: 'calcium12!',
-    database: 'postgres',
-    port: 5432,
-    ssl: true
-};
-
-
-function queryDatabase() {
-  const query = `
-      DROP TABLE IF EXISTS inventory;
-      CREATE TABLE inventory (id serial PRIMARY KEY, name VARCHAR(50), quantity INTEGER);
-      INSERT INTO inventory (name, quantity) VALUES ('banana', 150);
-      INSERT INTO inventory (name, quantity) VALUES ('orange', 154);
-      INSERT INTO inventory (name, quantity) VALUES ('apple', 100);
-  `;
-
-  client
-      .query(query)
-      .then(() => {
-          console.log('Table created successfully!');
-          client.end(console.log('Closed client connection'));
-      })
-      .catch(err => console.log(err))
-      .then(() => {
-          console.log('Finished execution, exiting now');
-          process.exit();
-      });
-}
-//set up DB connection
-const client = new pg.Client(config);
-function test(){
-client.connect(err => {
-    if (err) throw err;
-    else {
-      console.log("connection successful");
-        queryDatabase();
-    }
-});
-}
-//calling function, can run npm start outside of client to see
-test();
-
-
-
-//--------------------------------------END DB STUFF----------------------------------------------------------------
-
 const app = express();
+
 app.use(express.json());
 app.use(cors());
-
 
 app.get("/videos", async (req, res) => {
   try {
@@ -87,6 +30,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`hello, Server is running on post ${port}`);
+  console.log(`Server is running on post ${port}`);
 });
-
