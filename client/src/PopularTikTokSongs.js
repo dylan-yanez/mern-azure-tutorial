@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import baseUrl from "./baseUrl";
 
 const PopularTikTokSongs = () => {
@@ -24,10 +25,10 @@ const PopularTikTokSongs = () => {
       <div className="video-container">
         {videos.map((video) => (
           <div key={video.id.videoId} className="video-card">
-            <a
-              href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* Replace <a> tag with <Link> */}
+            <Link
+              to={`/video/${video.id.videoId}`} // Route to VideoPlayerPage with videoId parameter
+              className="video-link"
             >
               <img
                 src={video.snippet.thumbnails.medium.url}
@@ -37,7 +38,7 @@ const PopularTikTokSongs = () => {
               <div className="video-info">
                 <h3 className="video-title">{video.snippet.title}</h3>
               </div>
-            </a>
+            </Link>
           </div>
         ))}
       </div>

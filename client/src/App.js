@@ -8,8 +8,7 @@ import Playlists from './Playlists';
 import Settings from './Settings';
 import NewUser from './NewUser';
 import SearchResult from './SearchResult';
-import PopularTikTokSongs from './PopularTikTokSongs'; // Import the new component
-import PopularSlowedAndReverbSongs from './PopularSlowedAndReverbSongs'; // Import the new component
+import VideoPlayerPage from './VideoPlayerPage';
 
 const App = () => {
   const [showNewUser, setShowNewUser] = useState(false);
@@ -26,11 +25,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchResult />} />
-            <Route path="/tiktok-songs" element={<PopularTikTokSongs />} /> {/* Route for TikTok songs */}
-            <Route path="/slowed-and-reverb-songs" element={<PopularSlowedAndReverbSongs />} /> {/* Route for Slowed and Reverb songs */}
             <Route path="/profile" element={<Login onSignUp={handleSignUp} />} />
             <Route path="/playlists" element={<Playlists />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/video/:videoId" element={<VideoPlayerPage />} />
           </Routes>
         </div>
       </div>

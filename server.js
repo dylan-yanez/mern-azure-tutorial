@@ -28,8 +28,7 @@ app.get("/videos", async (req, res) => {
 app.get("/tiktoksongs", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDW5Hsh46Vm10dY-IvCDLBtpBZaPNi30Q4&part=snippet&type=video&q=popular%20tiktok%20songs&maxResults=5`
-      // Change 'YOUR_API_KEY' to your actual YouTube Data API key
+      `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDW5Hsh46Vm10dY-IvCDLBtpBZaPNi30Q4&part=snippet&type=video&q=oneheart&maxResults=5`
     );
     res.json(response.data);
   } catch (error) {
@@ -43,7 +42,6 @@ app.get("/slowedandreverb", async (req, res) => {
   try {
     const response = await axios.get(
       `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDW5Hsh46Vm10dY-IvCDLBtpBZaPNi30Q4&part=snippet&type=video&q=popular%20slowed%20and%20reverb%20songs&maxResults=5`
-      // Change 'YOUR_API_KEY' to your actual YouTube Data API key
     );
     res.json(response.data);
   } catch (error) {

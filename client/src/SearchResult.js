@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import baseUrl from "./baseUrl";
 import "./SearchResult.css";
 
@@ -32,11 +32,7 @@ const SearchResult = () => {
       <div className="video-container">
         {videos.map((video) => (
           <div key={video.id.videoId} className="video-card">
-            <a
-              href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link to={`/video/${video.id.videoId}`}>
               <img
                 src={video.snippet.thumbnails.medium.url}
                 alt={video.snippet.title}
@@ -45,7 +41,7 @@ const SearchResult = () => {
               <div className="video-info">
                 <h3 className="video-title">{video.snippet.title}</h3>
               </div>
-            </a>
+            </Link>
           </div>
         ))}
       </div>
