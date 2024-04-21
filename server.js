@@ -11,11 +11,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const apiKey = process.env.Api_Key_YT;
+
 app.get("/videos", async (req, res) => {
   try {
     const { query } = req.query;
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDW5Hsh46Vm10dY-IvCDLBtpBZaPNi30Q4&part=snippet&type=video&q=${query}&maxResults=15`
+      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&q=${query}&maxResults=15`
     );
     res.json(response.data);
   } catch (error) {
@@ -28,7 +30,7 @@ app.get("/sections", async (req, res) => {
   try {
     const { query } = req.query;
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDW5Hsh46Vm10dY-IvCDLBtpBZaPNi30Q4&part=snippet&type=video&q=${query}&maxResults=5`
+      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&q=${query}&maxResults=5`
     );
     res.json(response.data);
   } catch (error) {
