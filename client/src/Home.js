@@ -4,7 +4,6 @@ import './Home.css'; // css file for styling
 
 import SearchTool from './SearchTool';
 import PopularTikTokSongs from './PopularTikTokSongs';
-import PopularSlowedAndReverbSongs from './PopularSlowedAndReverbSongs';
 
 const Home = () => {
   return (
@@ -30,12 +29,13 @@ const Home = () => {
 
           {/* Popular TikTok Songs Section */}
           <section className="popular-tiktok-songs">
-            <PopularTikTokSongs />
+            <h2>Best of Belgiums biggest star Damso</h2>
+            <PopularTikTokSongs query="Damso Slowed and Reverb" />
           </section>
-
           {/* Popular Slowed and Reverb Songs Section */}
-          <section className="popular-slowed-and-reverb-songs">
-            <PopularSlowedAndReverbSongs />
+          <section className="popular-tiktok-songs">
+            <h2>Trending Oneheart hits</h2>
+            <PopularTikTokSongs query="Oneheart best songs" />
           </section>
         </main>
         <footer>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 import baseUrl from "./baseUrl";
 import "./SearchResult.css";
+import SearchTool from './SearchTool';
 
 const SearchResult = () => {
   const location = useLocation();
@@ -28,11 +29,12 @@ const SearchResult = () => {
 
   return (
     <div className="search-result-container">
+      <SearchTool />
       <h2 className="search-title">Searching for "{searchQuery}"...</h2>
       <div className="video-container">
         {videos.map((video) => (
           <div key={video.id.videoId} className="video-card">
-            <Link to={`/video/${video.id.videoId}`}>
+            <Link to={`/video/${video.id.videoId}?title=${encodeURIComponent(video.snippet.title)}&thumbnail=${encodeURIComponent(video.snippet.thumbnails.medium.url)}`}>
               <img
                 src={video.snippet.thumbnails.medium.url}
                 alt={video.snippet.title}
@@ -46,7 +48,9 @@ const SearchResult = () => {
         ))}
       </div>
       {loading && <p className="loading-text">Loading...</p>}
+      
     </div>
+    
   );
 };
 
