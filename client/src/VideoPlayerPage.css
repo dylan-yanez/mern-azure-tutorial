@@ -1,0 +1,39 @@
+.video-player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .video-player-wrapper {
+    width: 80%;
+  }
+  
+  .controls {
+    margin-top: 20px;
+  }
+  
+  .timeline {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .timeline input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .timeline span {
+    font-size: 14px;
+  }
+  .video-title {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .video-title h1 {
+    font-size: 24px;
+  }
+    

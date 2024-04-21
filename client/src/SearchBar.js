@@ -10,13 +10,20 @@ const SearchBar = () => {
     navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div style={{ textAlign: 'center', margin: '20px auto', maxWidth: '400px' }}>
       <input 
         type="text" 
         value={searchTerm} 
         onChange={(e) => setSearchTerm(e.target.value)} 
-        placeholder="Enter search term" 
+        onKeyDown={handleKeyPress} // Handle Enter key press
+        placeholder="Explore new beats" 
         style={{
           padding: '10px',
           fontSize: '16px',
