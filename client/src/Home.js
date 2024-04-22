@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom'; // Import Link
+//import { Link } from 'react-router-dom'; // Import Link
 import './Home.css'; // css file for styling
 
 import SearchTool from './SearchTool';
 import PopularTikTokSongs from './PopularTikTokSongs';
+import OneheartSection from './OneheartSection';
 
 const Home = () => {
   return (
@@ -29,13 +30,13 @@ const Home = () => {
 
           {/* Popular TikTok Songs Section */}
           <section className="popular-tiktok-songs">
-            <h2>Best of Belgiums biggest star Damso</h2>
-            <PopularTikTokSongs query="Damso Slowed and Reverb" />
+            <h2 style={{ color: 'white' }}>Belgium's biggest star Damso</h2>
+            <PopularTikTokSongs />
           </section>
           {/* Popular Slowed and Reverb Songs Section */}
           <section className="popular-tiktok-songs">
-            <h2>Trending Oneheart hits</h2>
-            <PopularTikTokSongs query="Oneheart best songs" />
+            <h2 style={{ color: 'white' }}>Best of Oneheart and others</h2>
+            <OneheartSection />
           </section>
         </main>
         <footer>

@@ -2,59 +2,59 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 //import './PopularTikTokSongs.css'; // Import the CSS file
 
-const PopularTikTokSongs = () => {
+const OneheartSection = () => {
   const videos = [
     {
-      id: 'EAry_V5lS2E',
+      id: 'J4RxO3lRsi0',
       snippet: {
-        title: 'Mosaique Solitaire',
+        title: 'this feeling',
         thumbnails: {
           medium: {
-            url: 'https://i.ytimg.com/vi/EAry_V5lS2E/mqdefault.jpg'
+            url: 'https://i.ytimg.com/vi/J4RxO3lRsi0/mqdefault.jpg'
           }
         }
       }
     },
     {
-      id: 'R6K4oETN4Sk',
+      id: '1ZqqLqWQtko',
       snippet: {
-        title: 'Autotune',
+        title: 'apathy',
         thumbnails: {
           medium: {
-            url: 'https://i.ytimg.com/vi/R6K4oETN4Sk/mqdefault.jpg'
+            url: 'https://i.ytimg.com/vi/1ZqqLqWQtko/mqdefault.jpg'
           }
         }
       }
     },
     {
-      id: '6mSUvONrwrc',
+      id: 'rpG6Iz0w4Z0',
       snippet: {
-        title: 'Dieu ne ment jamais',
+        title: 'I was only temporary',
         thumbnails: {
           medium: {
-            url: 'https://i.ytimg.com/vi/6mSUvONrwrc/mqdefault.jpg'
+            url: 'https://i.ytimg.com/vi/rpG6Iz0w4Z0/mqdefault.jpg'
           }
         }
       }
     },
     {
-      id: 'G16dOV1hxmg',
+      id: 'ENIDzfg1ecI',
       snippet: {
-        title: 'amnésie',
+        title: 'shootout',
         thumbnails: {
           medium: {
-            url: 'https://i.ytimg.com/vi/G16dOV1hxmg/mqdefault.jpg'
+            url: 'https://i.ytimg.com/vi/ENIDzfg1ecI/mqdefault.jpg'
           }
         }
       }
     },
     {
-      id: '7yQWoQ12YVc',
+      id: 'dm87PN-fTlg',
       snippet: {
-        title: 'Kietu',
+        title: 'its okay youre okay',
         thumbnails: {
           medium: {
-            url: 'https://i.ytimg.com/vi/7yQWoQ12YVc/mqdefault.jpg'
+            url: 'https://i.ytimg.com/vi/dm87PN-fTlg/mqdefault.jpg'
           }
         }
       }
@@ -86,4 +86,4 @@ const PopularTikTokSongs = () => {
   );
 }
 
-export default PopularTikTokSongs;
+export default OneheartSection;
