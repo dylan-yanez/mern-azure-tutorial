@@ -17,7 +17,7 @@ app.get("/videos", async (req, res) => {
   try {
     const { query } = req.query;
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&q=${query}&maxResults=15`
+      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&q=${query}&maxResults=15&fields=items(id/videoId,snippet/title,snippet/thumbnails/medium/url)`
     );
     res.json(response.data);
   } catch (error) {
@@ -30,7 +30,7 @@ app.get("/sections", async (req, res) => {
   try {
     const { query } = req.query;
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&q=${query}&maxResults=5`
+      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&q=${query}&maxResults=5&fields=items(id/videoId,snippet/title,snippet/thumbnails/medium/url)`
     );
     res.json(response.data);
   } catch (error) {
