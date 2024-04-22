@@ -1,0 +1,49 @@
+.playlist-form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .playlist-form-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+  }
+  
+  .playlist-form-container input[type="text"],
+  .playlist-form-container textarea,
+  .playlist-form-container input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .playlist-form-container input[type="file"] {
+    padding-top: 15px; /* Adjust vertical alignment */
+  }
+  
+  .playlist-form-container textarea {
+    resize: vertical; /* Allow vertical resizing */
+  }
+  
+  .playlist-form-container button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .playlist-form-container button:hover {
+    background-color: #45a049;
+  }
+  

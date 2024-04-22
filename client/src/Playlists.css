@@ -17,15 +17,15 @@
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 20px;
-  width: 50%;
-  height: 50%;
+  width: 60%;
+  height: 80%;
   border-radius: 10px;
   z-index: 1; /* Ensure the centered box is on top */
 }
 
 .create-playlist-container {
   position: fixed;
-  top: 200px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2; /* Ensure the create playlist button is on top of the centered box */
@@ -53,17 +53,25 @@
 }
 
 .playlist-item {
-  text-align: center;
-  margin-bottom: 20px; /* Add margin between playlist items */
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .playlist-item img {
-  width: 100%;
-  border-radius: 5px;
+  width: 100px; /* Adjust as needed */
+  height: 100px; /* Adjust as needed */
+  margin-right: 20px;
 }
 
-.playlist-item h3 {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #333;
+.playlist-info {
+  flex-grow: 1;
+}
+
+.playlist-info h3 {
+  margin: 0;
+}
+
+.playlist-info p {
+  margin: 5px 0;
 }

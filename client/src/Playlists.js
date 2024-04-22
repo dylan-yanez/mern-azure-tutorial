@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Playlists.css';
+import PlaylistForm from './PlaylistForm'; // Import the PlaylistForm component
 
 const Playlists = () => {
   // State for storing playlist data
@@ -26,35 +27,34 @@ const Playlists = () => {
   }, []);
 
   // Function to handle creating a new playlist
-  const handleCreatePlaylist = () => {
-    const playlistName = window.prompt('Enter the name of the playlist:');
-    if (playlistName) {
-      const newPlaylist = {
-        id: playlists.length + 1, // Assign a unique ID
-        name: playlistName,
-        // Add any additional properties as needed
-      };
-      setPlaylists([...playlists, newPlaylist]);
-      setIsEmpty(false); // Update isEmpty state
-    }
+  const handleCreatePlaylist = (playlistData) => {
+    // Add new playlist
+    const newPlaylist = {
+      id: playlists.length + 1, // Assign a unique ID
+      name: playlistData.name,
+      image: playlistData.image,
+      description: playlistData.description,
+      songs: playlistData.songs // Assuming the playlist data includes songs
+      // Add any additional properties as needed
+    };
+    setPlaylists([...playlists, newPlaylist]);
+    setIsEmpty(false); // Update isEmpty state
   };
 
   return (
     <div className="playlists-wrapper">
       <div className="create-playlist-container">
-          <button className="create-playlist-button" onClick={handleCreatePlaylist}>
-            Create Playlist
-          </button>
-        </div>
+        {/* Render the PlaylistForm component */}
+        <PlaylistForm onCreatePlaylist={handleCreatePlaylist} />
+      </div>
       <div className="centered-box">
-        
         <div className="playlist-container">
           {isEmpty ? (
             <div className="empty-playlist">No playlists available</div>
           ) : (
             playlists.map((playlist) => (
               <div key={playlist.id} className="playlist-item">
-                <img src={playlist.imageUrl} alt={playlist.name} />
+                <img src={playlist.image} alt={playlist.name} />
                 <h3>{playlist.name}</h3>
                 {/* Add additional playlist information and interactions here */}
               </div>
