@@ -1,81 +1,77 @@
-/* Home.css */
-.image-wrapper{
-    background-image: url('../assets/waves.jpg');
-  }
-  /* Container styles */
-  .home-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Set minimum height to full viewport height */
-  }
-  
-  /* Header styles */
-  .title {
-    font-size: 3rem; /* Increase font size */
-    margin-bottom: 30px; /* Increase bottom margin */
-    text-align: center; /* Align the text to the center */
-    margin-top: 40px; /* Add margin at the top */
-    color: white; /* Change text color */
-  }
-  
-  /* Navigation styles */
-  .nav-links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: center; /* Align the navigation links to the center */
-  }
-  
-  
-  .nav-links li a:hover {
-    color: #0056b3; /* Change link color on hover */
-  }
-  
-  /* Main section styles */
-  .main-section {
-    margin-top: 250px; /* Adjust the margin-top value to move it further down */
-    text-align: center;
-  }
-  
-  .section-heading {
-    font-size: 2rem;
-    margin-bottom: 20px; /* Increase bottom margin */
-    color: white; /* Change text color */
-  }
-  
-  .section-text {
-    font-size: 1.2rem;
-    margin-bottom: 30px; /* Increase bottom margin */
-    color: white; /* Change text color */
-  }
-  
-  .cta-button {
-    padding: 12px 24px; /* Increase padding */
-    font-size: 1.2rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .cta-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Footer styles */
-  footer {
-    margin-top: auto; /* Push footer to the bottom */
-    text-align: center;
-    padding: 20px 0; /* Add some padding for spacing */
-  }
-  
-  .footer-text {
-    font-size: 0.8rem;
-    color: #666; /* Change text color */
-  }
-  
+.playlists-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #e056fd;
+  background-image: linear-gradient(163deg, #e056fd 0%, #000000 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.centered-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  width: 60%;
+  height: 60%;
+  border-radius: 10px;
+  z-index: 1; /* Ensure the centered box is on top */
+}
+
+.create-playlist-container {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2; /* Ensure the create playlist button is on top of the centered box */
+}
+
+.create-playlist-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-playlist-button:hover {
+  background-color: #0056b3;
+}
+
+.playlist-container {
+  display: flex;
+  flex-direction: column; /* Display playlists vertically */
+  align-items: center; /* Align playlists in the center horizontally */
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.playlist-item img {
+  width: 100px; /* Adjust as needed */
+  height: 100px; /* Adjust as needed */
+  margin-right: 20px;
+}
+
+.playlist-info {
+  flex-grow: 1;
+}
+
+.playlist-info h3 {
+  margin: 0;
+}
+
+.playlist-info p {
+  margin: 5px 0;
+}
