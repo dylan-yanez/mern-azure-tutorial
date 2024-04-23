@@ -18,14 +18,14 @@
   background-color: white;
   padding: 20px;
   width: 60%;
-  height: 80%;
+  height: 60%;
   border-radius: 10px;
   z-index: 1; /* Ensure the centered box is on top */
 }
 
 .create-playlist-container {
   position: fixed;
-  top: 100px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2; /* Ensure the create playlist button is on top of the centered box */
