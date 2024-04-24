@@ -2,16 +2,32 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const port = process.env.PORT || 3001;
-//const pool = require("./db"); Commented out because DB is not in use
+const pool = require("./db");
+const bodyParser = require('body-parser');
 const path = require('path');
 const axios = require("axios");
 
 const app = express();
 
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors());
 
 const apiKey = process.env.Api_Key_YT;
+
+app.post('/testdb', async (req, res) => {
+  const { text } = req.body;
+  try {
+      const newRecord = await pool.query(
+          'INSERT INTO test_table (text) VALUES ($1) RETURNING *',
+          [text]
+      );
+      res.json(newRecord.rows[0]); // Return the inserted record
+  } catch (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Internal Server Error');
+  }
+});
 
 app.get("/videos", async (req, res) => {
   try {

@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import './VideoPlayerPage.css'; // Import CSS file for styles
 import SearchTool from './SearchTool';
+import TestButton from './TestButton';
 
 const VideoPlayerPage = () => {
   const { videoId } = useParams();
@@ -132,6 +133,7 @@ const VideoPlayerPage = () => {
           value={volume}
           onChange={handleVolumeChange}
         />
+        <TestButton />
       </div>
       {/* Video timeline and time display */}
       <div className="timeline">
