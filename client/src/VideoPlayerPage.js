@@ -148,6 +148,15 @@ const VideoPlayerPage = () => {
         <span>{formatTime(currentTime)}/{formatTime(duration)}</span>
       </div>
     </div>
+          <section className="popular-tiktok-songs">
+            <h2 style={{ color: 'white' }}>Belgium's biggest star Damso</h2>
+            <PopularTikTokSongs />
+          </section>
+          {/* Popular Slowed and Reverb Songs Section */}
+          <section className="popular-tiktok-songs">
+            <h2 style={{ color: 'white' }}>Best of Oneheart and others</h2>
+            <OneheartSection />
+          </section>
   );
 };
 
