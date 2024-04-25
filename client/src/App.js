@@ -29,6 +29,7 @@ const App = () => {
             <Route path="/playlists" element={<Playlists />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/video/:videoId" element={<VideoPlayerPage />} />
+            <Route path="/signup" element={<NewUser />} />
           </Routes>
         </div>
       </div>

@@ -1,36 +1,53 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import './Login.css';
+import baseUrl from "./baseUrl"; // Import baseUrl
 
-const Login = ({ onLogin, onSignUp }) => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState(''); // Add successMessage state
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    
-    // Perform account validation here
-    const isValid = validateAccount(username, password);
-    if (isValid) {
-      setError('');
-      onLogin(username, password);
-    } else {
+
+    try {
+      const response = await fetch(`${baseUrl}/logindetails`, { // Use baseUrl for the login endpoint
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+
+      const userData = await response.json();
+      console.log('User logged in successfully:', userData);
+      setSuccessMessage('Successfully logged in!'); // Set success message
+      setError(''); // Clear error message
+      // Optionally, you can redirect the user to another page or perform any necessary actions upon successful login
+    } catch (error) {
+      console.error('Error logging in:', error.message);
       setError('Invalid username or password. Please try again.');
+      setSuccessMessage(''); // Clear success message
     }
   };
 
-  const validateAccount = (username, password) => {
-    // Implement your account validation logic here
-    // For example, you can check if the username and password match an existing account in your system
-    // You might make an API call to your backend to validate the credentials
-    // For demonstration purposes, let's assume a simple validation where username is 'user' and password is 'password'
-    return username === 'user' && password === 'password';
+  const handleSignUp = () => {
+    navigate('/signup'); // Redirect to the signup page
   };
 
   return (
     <div className='login-wrapper'>
       <div className="login-container">
         <h2>Welcome Back!</h2>
+        {successMessage && <p className="success-message">{successMessage}</p>} {/* Display success message */}
         <form onSubmit={handleLogin}>
           <div className="form-group">
             <input
@@ -49,9 +66,9 @@ const Login = ({ onLogin, onSignUp }) => {
             />
           </div>
           <button type="submit">Login</button>
-          {error && <p className="error-message">{error}</p>}
+          {error && <p className="error-message">{error}</p>} {/* Display error message */}
         </form>
-        <p className="signup-link" onClick={onSignUp}>Don't have an account? Sign up now!</p> 
+        <p className="signup-link" onClick={handleSignUp}>Don't have an account? Sign up now!</p> 
       </div>
     </div>
   );
