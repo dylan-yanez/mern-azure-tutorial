@@ -96,7 +96,7 @@ app.get("/videos", async (req, res) => {
   try {
     const { query } = req.query;
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&q=${query}&maxResults=15&fields=items(id/videoId,snippet/title,snippet/thumbnails/medium/url)`
+      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&q=${query}&maxResults=15&fields=items(id/videoId,snippet/title,snippet/thumbnails/medium/url)`
     );
     res.json(response.data);
   } catch (error) {
@@ -104,7 +104,8 @@ app.get("/videos", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
+/*
+***** No Longer in Use
 app.get("/sections", async (req, res) => {
   try {
     const { query } = req.query;
@@ -116,7 +117,7 @@ app.get("/sections", async (req, res) => {
     console.error("Error fetching videos:", error);
     res.status(500).json({ message: "Internal server error" });
   }
-});
+}); */ 
 
 
 app.use(express.static("./client/build"));
