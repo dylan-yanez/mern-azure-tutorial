@@ -1,47 +1,59 @@
 import React, { useState } from 'react';
-import bcrypt from 'bcryptjs'; // Import bcrypt library
 import './NewUser.css'; // Import the CSS file for styling
+import baseUrl from "./baseUrl";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
-const NewUser = ({ onSignUp }) => {
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
+const NewUser = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    
-    // Hash and salt the password
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
-
-    // Pass hashed password to onSignUp function
-    onSignUp({ firstname, lastname, email, username, password: hashedPassword });
+  
+    try {
+      const response = await fetch(`${baseUrl}/signupdetails`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, username, password }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message);
+        setSuccessMessage('');
+        return;
+      }
+  
+      const newUser = await response.json();
+      console.log('User signed up successfully:', newUser);
+      setSuccessMessage('User signed up successfully!');
+      setErrorMessage('');
+      
+      // Redirect to login page after 3 seconds
+      setTimeout(() => {
+        navigate('/profile'); // Redirect to the login page
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+      setErrorMessage('Internal server error');
+      setSuccessMessage('');
+    }
   };
 
   return (
     <div className='new-user-wrapper'>
       <div className="new-user-container">
         <h2>Create New Account</h2>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+        {successMessage && <div className="success-message">{successMessage}</div>}
         <form onSubmit={handleSignUp}>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="First Name"
-              value={firstname}
-              onChange={(e) => setFirstname(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Last Name"
-              value={lastname}
-              onChange={(e) => setLastname(e.target.value)}
-              required
-            />
-          </div>
           <div className="form-group">
             <input
               type="email"
