@@ -3,7 +3,8 @@ import ReactPlayer from 'react-player';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import './VideoPlayerPage.css'; // Import CSS file for styles
 import SearchTool from './SearchTool';
-import TestButton from './TestButton';
+import LikeButton from './LikeButton';
+import SessionInfoComponent from './SessionInfoComponent';
 
 const VideoPlayerPage = () => {
   const { videoId } = useParams();
@@ -101,8 +102,8 @@ const VideoPlayerPage = () => {
       <button onClick={handleBack}>Revisit previous results</button>
       {/* Title */}
       <div className="video-title">
-      <h1>{title}</h1>
-      <img src={thumbnail} alt="Thumbnail" className="video-thumbnail" />
+        <h1>{title}</h1>
+        <img src={thumbnail} alt="Thumbnail" className="video-thumbnail" />
       </div>
       <div className="video-player-wrapper">
         {/* React Player to play the video */}
@@ -133,7 +134,9 @@ const VideoPlayerPage = () => {
           value={volume}
           onChange={handleVolumeChange}
         />
-        <TestButton />
+        {/* Like button */}
+        <LikeButton videoId={videoId} videoTitle={title} />
+        <SessionInfoComponent />
       </div>
       {/* Video timeline and time display */}
       <div className="timeline">
