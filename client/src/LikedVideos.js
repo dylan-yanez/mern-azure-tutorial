@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './LikedVideos.css'; // Import CSS file for styling
 
 const LikedVideos = () => {
   const [likedVideos, setLikedVideos] = useState([]);
@@ -20,8 +21,9 @@ const LikedVideos = () => {
   }, []);
 
   return (
-    <div className="liked-videos">
-      <div className="video-container">
+    <div className="liked-videos-container">
+      <h2 className="section-heading">Liked Videos</h2>
+      <div className="video-grid">
         {likedVideos.map((video) => (
           <div key={video.id} className="video-card">
             <Link

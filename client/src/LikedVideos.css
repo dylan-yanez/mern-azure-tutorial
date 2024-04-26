@@ -1,0 +1,42 @@
+.liked-videos-container {
+    padding: 20px;
+  }
+  
+  .section-heading {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .video-card {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .video-link {
+    display: block;
+    text-decoration: none;
+  }
+  
+  .video-thumbnail {
+    width: 100%;
+    height: auto;
+  }
+  
+  .video-info {
+    padding: 10px;
+  }
+  
+  .video-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
