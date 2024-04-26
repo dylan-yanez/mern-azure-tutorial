@@ -1,7 +1,5 @@
-// Sidebar.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-//import { HiHome, HiMusicNote, HiPlay, HiUser, HiCog } from 'react-icons/hi';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -15,28 +13,33 @@ const Sidebar = () => {
     <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="logo">
         <Link to="/">
-            <img src="logo.png" alt="Logo" className="logo" />
+          <img src="logo.png" alt="Logo" className="logo" />
         </Link>
       </div>
       <ul className="nav-links">
         <li>
           <Link to="/">
-             Home
+            Home
           </Link>
         </li>
         <li>
           <Link to="/playlists">
-             Playlists
+            Playlists
+          </Link>
+        </li>
+        <li>
+          <Link to="/likedsongs">
+            Liked Songs
           </Link>
         </li>
         <li>
           <Link to="/profile">
-             Profile
+            Profile
           </Link>
         </li>
         <li>
           <Link to="/settings">
-             Settings
+            Settings
           </Link>
         </li>
       </ul>

@@ -82,13 +82,7 @@ app.post('/logindetails', async (req, res) => {
 
     // Store the user ID in the session
     req.session.userId = user.rows[0].user_id;
-    console.log(req.session)
-
-    res.cookie('test', 'cookie value', {
-      maxAge: 1 * 60 * 60 * 1000, // Expiration time for the cookie (1 hour)
-      httpOnly: true, // Prevent client-side JavaScript from accessing the cookie
-      sameSite: 'strict' // Mitigate CSRF attacks
-    });
+    console.log(req.session);
 
     res.cookie('sessionId', req.session.id, {
       maxAge: 1 * 60 * 60 * 1000, // Same expiration time as session
@@ -97,7 +91,8 @@ app.post('/logindetails', async (req, res) => {
     });
 
     // If username and password match, return the user data
-    res.status(200).json(user.rows[0]);
+    //res.status(200).json(user.rows[0]);
+    res.status(200).json({ message: 'User logged in successfully' });
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -131,7 +126,8 @@ app.post('/signupdetails', async (req, res) => {
     req.session.userId = newUser.rows[0].id;
 
     // Send a success response with the newly created user
-    res.status(201).json(newUser.rows[0]);
+    //res.status(201).json(newUser.rows[0]);
+    res.status(201).json({ message: 'User signed up successfully' });
   } catch (error) {
     console.error('Error signing up:', error);
     res.status(500).json({ message: 'Internal server error' });

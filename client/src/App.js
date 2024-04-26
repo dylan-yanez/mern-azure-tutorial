@@ -9,6 +9,7 @@ import Settings from './Settings';
 import NewUser from './NewUser';
 import SearchResult from './SearchResult';
 import VideoPlayerPage from './VideoPlayerPage';
+import LikedVideos from './LikedVideos';
 
 const App = () => {
   const [showNewUser, setShowNewUser] = useState(false);
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/settings" element={<Settings />} />
             <Route path="/video/:videoId" element={<VideoPlayerPage />} />
             <Route path="/signup" element={<NewUser />} />
+            <Route path="/likedsongs" element={<LikedVideos />} />
           </Routes>
         </div>
       </div>
