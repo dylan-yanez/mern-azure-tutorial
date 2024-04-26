@@ -140,7 +140,7 @@ app.get('/likedvideos', async (req, res) => {
   try {
     // Query the database to get all the liked videos for the user ID
     const likedVideos = await pool.query(
-      'SELECT * FROM liked_videos WHERE user_id = $1',
+      'SELECT * FROM likes WHERE user_id = $1',
       [userId]
     );
 
