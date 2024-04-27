@@ -5,6 +5,7 @@ import './VideoPlayerPage.css'; // Import CSS file for styles
 import SearchTool from './SearchTool';
 import LikeButton from './LikeButton';
 import SessionInfoComponent from './SessionInfoComponent';
+import AddToPlaylistButton from './AddToPlaylistButton'; // Import the AddToPlaylistButton component
 
 const VideoPlayerPage = () => {
   const { videoId } = useParams();
@@ -144,6 +145,7 @@ const VideoPlayerPage = () => {
             {/* Like button */}
             <LikeButton videoId={videoId} videoTitle={title} />
           </div>
+          <AddToPlaylistButton songId={videoId} songTitle={title} />
           <br></br>
           {/* Volume adjuster */}
           <input

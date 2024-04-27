@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
@@ -10,6 +9,7 @@ import NewUser from './NewUser';
 import SearchResult from './SearchResult';
 import VideoPlayerPage from './VideoPlayerPage';
 import LikedVideos from './LikedVideos';
+import PlaylistSongs from './PlaylistSongs'; // Import the new PlaylistSongs component
 
 const App = () => {
   const [showNewUser, setShowNewUser] = useState(false);
@@ -32,6 +32,7 @@ const App = () => {
             <Route path="/video/:videoId" element={<VideoPlayerPage />} />
             <Route path="/signup" element={<NewUser />} />
             <Route path="/likedsongs" element={<LikedVideos />} />
+            <Route path="/playlist/:playlistId" element={<PlaylistSongs />} /> {/* New route for playlist songs */}
           </Routes>
         </div>
       </div>
