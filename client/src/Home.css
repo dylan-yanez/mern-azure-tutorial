@@ -1,6 +1,11 @@
 /* Home.css */
 .image-wrapper{
-  background-image: url('../assets/waves.jpg');
+  background-image: url('../../assets/waves.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100vw; /* Set width to full viewport width */
+  height: 100vh; /* Set height to full viewport height */
 }
 /* Container styles */
 .home-container {
