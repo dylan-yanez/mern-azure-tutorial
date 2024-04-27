@@ -33,7 +33,7 @@ const LikeButton = ({ videoId, videoTitle }) => {
   };  
 
   return (
-    <button onClick={handleLike}>{liked ? 'Unlike' : 'Like'}</button>
+    <button className="button-29" onClick={handleLike}>{liked ? 'Unlike' : 'Like'}</button>
   );
 };
 

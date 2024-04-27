@@ -96,65 +96,85 @@ const VideoPlayerPage = () => {
   }, []); // Run only once on component mount
 
   return (
-    <div className="video-player-container">
-      <SearchTool />
-      {/* Back button */}
-      <button onClick={handleBack}>Revisit previous results</button>
-      {/* Title */}
-      <div className="video-title">
-        <h1>{title}</h1>
-        <img src={thumbnail} alt="Thumbnail" className="video-thumbnail" />
-      </div>
-      <div className="video-player-wrapper">
-        {/* React Player to play the video */}
-        <ReactPlayer
-          ref={playerRef}
-          url={videoUrl}
-          playing={isPlaying}
-          volume={volume}
-          controls={false} // Hide the default controls
-          width="0" // Set width to 0 to hide the video
-          height="0" // Set height to 0 to hide the video
-          style={{ visibility: 'hidden' }} // Hide the video element
-          onProgress={handleProgress} // Track video progress
-          onDuration={handleDuration} // Get total duration of the video
-          onEnded={handleEnded}
-        />
-      </div>
-      {/* Buttons to control video playback */}
-      <div className="controls">
-        <button onClick={handlePlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>
-        <button onClick={handleRestart}>Replay this beat!!!</button>
-        {/* Volume adjuster */}
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={volume}
-          onChange={handleVolumeChange}
-        />
-        {/* Like button */}
-        <LikeButton videoId={videoId} videoTitle={title} />
-        <SessionInfoComponent />
-      </div>
-      {/* Video timeline and time display */}
-      <div className="timeline">
-        <input
-          type="range"
-          min={0}
-          max={duration}
-          step={0.01}
-          value={currentTime}
-          onChange={handleSeek}
-          onMouseDown={handleSeekMouseDown}
-          onMouseUp={handleSeekMouseUp}
-        />
-        <span>{formatTime(currentTime)}/{formatTime(duration)}</span>
+    //Background
+      //Container
+        //Search
+        //Back Button
+      //Song Name
+      //Thumbnail
+      //Volume Controlls & buttons
+      //Session Info
+    <div className="music-player-background">
+      <div className="video-player-container">
+        <div className="search-tool-container">
+          <SearchTool />
+        </div>
+        <div className="back-button">
+          {/* Back button */}
+          <button class="button-29" onClick={handleBack} role="button">Back</button>
+        </div>
+        {/* Title */}
+        <div className="video-title">
+          <h1>{title}</h1>
+          <img src={thumbnail} alt="Thumbnail" className="video-thumbnail" />
+        </div>
+        <div className="video-player-wrapper">
+          {/* React Player to play the video */}
+          <ReactPlayer
+            ref={playerRef}
+            url={videoUrl}
+            playing={isPlaying}
+            volume={volume}
+            controls={false} // Hide the default controls
+            width="0" // Set width to 0 to hide the video
+            height="0" // Set height to 0 to hide the video
+            style={{ visibility: 'hidden' }} // Hide the video element
+            onProgress={handleProgress} // Track video progress
+            onDuration={handleDuration} // Get total duration of the video
+            onEnded={handleEnded}
+          />
+        </div>
+        {/* Buttons to control video playback */}
+        <div className="controls">
+          <div className="button-controls">
+            <button class="button-29" onClick={handlePlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>
+            <button class="button-29" onClick={handleRestart}>Restart</button>
+          </div>
+          <div className="like-button-controls">
+            {/* Like button */}
+            <LikeButton videoId={videoId} videoTitle={title} />
+          </div>
+          <br></br>
+          {/* Volume adjuster */}
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={volume}
+            onChange={handleVolumeChange}
+          />
+          <br></br>
+          <SessionInfoComponent />
+        </div>
+        {/* Video timeline and time display */}
+        <div className="timeline">
+          <input
+            type="range"
+            min={0}
+            max={duration}
+            step={0.01}
+            value={currentTime}
+            onChange={handleSeek}
+            onMouseDown={handleSeekMouseDown}
+            onMouseUp={handleSeekMouseUp}
+          />
+          <span>{formatTime(currentTime)}/{formatTime(duration)}</span>
+        </div>
       </div>
     </div>
-  );
-};
+      );
+    };
 
 // Function to format time in MM:SS format
 const formatTime = (time) => {
