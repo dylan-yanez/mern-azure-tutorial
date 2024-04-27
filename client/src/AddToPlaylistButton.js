@@ -39,7 +39,7 @@ const AddToPlaylistButton = ({ songId, songTitle }) => {
 
   return (
     <div>
-      <button onClick={() => setShowPopup(true)}>Add to Playlist</button>
+      <button className="button-29" onClick={() => setShowPopup(true)}>Add to Playlist</button>
       {showPopup && (
         <div>
           <h2>Select a Playlist</h2>

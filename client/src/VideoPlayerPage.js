@@ -6,6 +6,7 @@ import SearchTool from './SearchTool';
 import LikeButton from './LikeButton';
 import SessionInfoComponent from './SessionInfoComponent';
 import AddToPlaylistButton from './AddToPlaylistButton'; // Import the AddToPlaylistButton component
+import DiscoverSong from './DiscoverSong';
 
 const VideoPlayerPage = () => {
   const { videoId } = useParams();
@@ -107,9 +108,6 @@ const VideoPlayerPage = () => {
       //Session Info
     <div className="music-player-background">
       <div className="video-player-container">
-        <div className="search-tool-container">
-          <SearchTool />
-        </div>
         <div className="back-button">
           {/* Back button */}
           <button class="button-29" onClick={handleBack} role="button">Back</button>
@@ -142,10 +140,10 @@ const VideoPlayerPage = () => {
             <button class="button-29" onClick={handleRestart}>Restart</button>
           </div>
           <div className="like-button-controls">
-            {/* Like button */}
+            {/* More Buttons */}
             <LikeButton videoId={videoId} videoTitle={title} />
+            <AddToPlaylistButton songId={videoId} songTitle={title} />
           </div>
-          <AddToPlaylistButton songId={videoId} songTitle={title} />
           <br></br>
           {/* Volume adjuster */}
           <input
@@ -156,7 +154,6 @@ const VideoPlayerPage = () => {
             value={volume}
             onChange={handleVolumeChange}
           />
-          <br></br>
           <SessionInfoComponent />
         </div>
         {/* Video timeline and time display */}
@@ -172,6 +169,14 @@ const VideoPlayerPage = () => {
             onMouseUp={handleSeekMouseUp}
           />
           <span>{formatTime(currentTime)}/{formatTime(duration)}</span>
+        </div>
+        <br></br>
+        <div className="discover-song-container">
+        <h4>Discover a Song</h4>
+          <div className="discover-song">
+            {/* Discover a New Song Here */}
+            {videoId && <DiscoverSong />}
+          </div>
         </div>
       </div>
     </div>
