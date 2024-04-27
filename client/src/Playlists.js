@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Playlists.css';
-import PlaylistForm from './PlaylistForm'; // Import the PlaylistForm component
+import PlaylistForm from './PlaylistForm';
+import DeletePlaylistButton from './DeletePlaylistButton'; // Import the new button component
+import baseUrl from './baseUrl';
 
 const Playlists = () => {
-  // State for storing playlist data
   const [playlists, setPlaylists] = useState([]);
-  // State to track if playlists are empty
-  const [isEmpty, setIsEmpty] = useState(true); // Initially set to true to show only create form
-  // State to track whether to show the playlist form
+  const [isEmpty, setIsEmpty] = useState(true);
   const [showPlaylistForm, setShowPlaylistForm] = useState(false);
 
-  // Fetch playlist data from API (or initial data loading)
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        // Simulate fetching playlist data from API
-        const response = await fetch('your-api-endpoint');
-        const data = await response.json();
-        const fetchedPlaylists = data.playlists || []; // Default to empty array if no playlists
-        setPlaylists(fetchedPlaylists);
-        setIsEmpty(fetchedPlaylists.length === 0);
+        const response = await axios.get(`${baseUrl}/api/playlists`);
+        setPlaylists(response.data);
+        setIsEmpty(response.data.length === 0);
       } catch (error) {
         console.error('Error fetching playlists:', error);
       }
@@ -28,26 +25,26 @@ const Playlists = () => {
     fetchPlaylists();
   }, []);
 
-  // Function to handle creating a new playlist
-  const handleCreatePlaylist = (playlistData) => {
-    // Add new playlist
-    const newPlaylist = {
-      id: playlists.length + 1, // Assign a unique ID
-      name: playlistData.name,
-      image: playlistData.image,
-      description: playlistData.description,
-      songs: playlistData.songs // Assuming the playlist data includes songs
-      // Add any additional properties as needed
-    };
-    // Append the new playlist to the existing playlists
-    setPlaylists([...playlists, newPlaylist]);
-    setIsEmpty(false); // Update isEmpty state
-    setShowPlaylistForm(false); // Hide playlist form
+  const handleCreatePlaylist = async (playlistData) => {
+    try {
+      const response = await axios.post(`${baseUrl}/api/playlists`, playlistData);
+      const newPlaylist = response.data;
+      setPlaylists([...playlists, newPlaylist]);
+      setIsEmpty(false);
+      setShowPlaylistForm(false);
+    } catch (error) {
+      console.error('Error creating playlist:', error);
+    }
+  };
+
+  const handleDeletePlaylist = (deletedPlaylistId) => {
+    // Filter out the deleted playlist from the playlists array
+    const updatedPlaylists = playlists.filter(playlist => playlist.id !== deletedPlaylistId);
+    setPlaylists(updatedPlaylists);
   };
 
   return (
     <div className="playlists-wrapper">
-      {/* Conditionally render Create Playlist or Cancel button */}
       {showPlaylistForm ? (
         <div className="create-playlist-container">
           <button onClick={() => setShowPlaylistForm(false)}>Cancel</button>
@@ -57,24 +54,26 @@ const Playlists = () => {
           <button onClick={() => setShowPlaylistForm(true)}>Create Playlist</button>
         </div>
       )}
-      {/* Conditionally render PlaylistForm or playlist container */}
       {showPlaylistForm ? (
         <PlaylistForm onCreatePlaylist={handleCreatePlaylist} onFormClose={() => setShowPlaylistForm(false)} />
       ) : (
         <div className="centered-box">
-          {/* Only render playlists if not empty */}
           {!isEmpty && (
             <div className="playlist-container">
               {playlists.map((playlist) => (
                 <div key={playlist.id} className="playlist-item">
-                  <img src={playlist.image} alt={playlist.name} />
-                  <h3>{playlist.name}</h3>
-                  {/* Add additional playlist information and interactions here */}
+                  <Link
+                    to={`/playlist/${playlist.id}`} // Navigate to playlist songs component
+                    className="playlist-link"
+                  >
+                    <img src="https://i.ytimg.com/an_webp/NaZeslUINF4/mqdefault_6s.webp?du=3000&sqp=CLrZsrEG&rs=AOn4CLAHRCDiKt1V9xN7eJggalIzXWDDJA" alt={playlist.name} />
+                    <h3>{playlist.name}</h3>
+                  </Link>
+                  <DeletePlaylistButton playlistId={playlist.id} onDelete={handleDeletePlaylist} />
                 </div>
               ))}
             </div>
           )}
-          {/* Show message if playlists are empty */}
           {isEmpty && <div className="empty-playlist">No playlists available</div>}
         </div>
       )}

@@ -4,7 +4,7 @@ import './PlaylistForm.css'; // Import the CSS file for styling
 const PlaylistForm = ({ onCreatePlaylist }) => {
   const [playlistData, setPlaylistData] = useState({
     name: '',
-    image: null,
+    image: '', // Change to empty string to avoid errors with null image
     description: '',
     songs: []
   });
@@ -14,11 +14,6 @@ const PlaylistForm = ({ onCreatePlaylist }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPlaylistData({ ...playlistData, [name]: value });
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setPlaylistData({ ...playlistData, image: file });
   };
 
   const handleSubmit = (e) => {
@@ -32,7 +27,6 @@ const PlaylistForm = ({ onCreatePlaylist }) => {
   };
 
   return (
-    
     <div>
       <button onClick={toggleForm}>
         {showForm ? 'Cancel' : 'Create Playlist'}
@@ -49,10 +43,11 @@ const PlaylistForm = ({ onCreatePlaylist }) => {
               onChange={handleInputChange}
             />
             <input
-              type="file"
+              type="text"
               name="image"
-              accept="image/*"
-              onChange={handleFileChange}
+              placeholder="Image URL (Test)"
+              value="https://i.ytimg.com/vi/jM1c-bOUnV0/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCfpFQO8e9aPdeCgfnNjAUQR3D0dQ" // Placeholder image URL
+              disabled // Disable input field for image URL
             />
             <textarea
               name="description"
