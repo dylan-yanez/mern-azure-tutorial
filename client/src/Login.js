@@ -15,17 +15,24 @@ const Login = () => {
     const checkLoggedIn = async () => {
       try {
         const response = await fetch(`${baseUrl}/checklogin`);
-        const data = await response.json();
-        if (data.isLoggedIn) {
-          navigate('/settings');
+        const responseData = await response.text(); // Read response as text
+        console.log('Response from checklogin:', responseData); // Log response data
+        if (response.ok) {
+          const data = await response.json();
+          if (data.isLoggedIn) {
+            navigate('/settings');
+          }
+        } else {
+          throw new Error('Failed to check login status');
         }
       } catch (error) {
         console.error('Error checking login status:', error);
       }
     };
-
+  
     checkLoggedIn();
   }, [navigate]); // Include navigate in the dependency array
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
