@@ -44,7 +44,7 @@ app.post('/checklogin', (req, res) => {
 app.get('/api/users', async (req, res) => {
   try {
     // Query all users from the database
-    const users = await pool.query('SELECT id, username, email FROM users');
+    const users = await pool.query('SELECT user_id, username, email FROM users');
 
     // Send the list of users as a response
     res.status(200).json(users.rows);
@@ -66,7 +66,7 @@ app.delete('/api/users/:userId/playlists', async (req, res) => {
   try {
     // Delete all songs created by the user
     await pool.query(
-      'DELETE FROM playlist_songs WHERE created_by = $1',
+      'DELETE FROM playlist_songs WHERE user_id = $1',
       [userId]
     );
 
@@ -115,10 +115,10 @@ app.delete('/api/users/:userId', async (req, res) => {
 
   try {
     // Call the delete user playlists endpoint
-    await axios.delete(`${baseUrl}/api/users/${userId}/playlists`);
+    await axios.delete(`/api/users/${userId}/playlists`);
 
     // Call the delete user liked songs endpoint
-    await axios.delete(`${baseUrl}/api/users/${userId}/liked-songs`);
+    await axios.delete(`/api/users/${userId}/liked-songs`);
 
     // Delete the user
     await pool.query(
