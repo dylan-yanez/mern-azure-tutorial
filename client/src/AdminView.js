@@ -25,7 +25,7 @@ const AdminView = () => {
       await axios.delete(`/api/users/${userId}`);
 
       // Remove the user from the users list
-      setUsers(users.filter(user => user.id !== userId));
+      setUsers(users.filter(user => user.user_id !== userId));
     } catch (error) {
       console.error('Error deleting user:', error);
     }
@@ -44,11 +44,11 @@ const AdminView = () => {
         </thead>
         <tbody>
           {users.map(user => (
-            <tr key={user.id}>
+            <tr key={user.user_id}>
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>
-                <button onClick={() => deleteUser(user.id)}>Delete User</button>
+                <button onClick={() => deleteUser(user.user_id)}>Delete User</button>
               </td>
             </tr>
           ))}
