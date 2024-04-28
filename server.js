@@ -54,7 +54,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-
+/*
 app.delete('/api/users/:userId/playlists', async (req, res) => {
   const { userId } = req.params;
 
@@ -103,7 +103,7 @@ app.delete('/api/users/:userId/liked-songs', async (req, res) => {
     console.error('Error deleting user liked songs:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
-});
+}); 
 
 app.delete('/api/users/:userId', async (req, res) => {
   const { userId } = req.params;
@@ -131,7 +131,48 @@ app.delete('/api/users/:userId', async (req, res) => {
     console.error('Error deleting user and associated data:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
+}); */
+
+app.delete('/api/users/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  // Check if the user is an admin
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ message: 'You are not authorized to perform this action' });
+  }
+
+  try {
+    // Delete all songs created by the user
+    await pool.query(
+      'DELETE FROM playlist_songs WHERE user_id = $1',
+      [userId]
+    );
+
+    // Delete all playlists created by the user
+    await pool.query(
+      'DELETE FROM playlists WHERE creator_id = $1',
+      [userId]
+    );
+
+    // Delete all liked songs by the user
+    await pool.query(
+      'DELETE FROM likes WHERE user_id = $1',
+      [userId]
+    );
+
+    // Delete the user
+    await pool.query(
+      'DELETE FROM users WHERE user_id = $1',
+      [userId]
+    );
+
+    res.status(200).json({ message: 'User and associated data deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user and associated data:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
+
 
 
 
