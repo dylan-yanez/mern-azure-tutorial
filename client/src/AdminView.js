@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import baseUrl from "./baseUrl";
+import './AdminView.css'; // Import CSS file for styling
 
 const AdminView = () => {
   const [users, setUsers] = useState([]);
@@ -32,9 +33,9 @@ const AdminView = () => {
   };
 
   return (
-    <div>
-      <h2>All Users</h2>
-      <table>
+    <div className="admin-view">
+      <h2 className="admin-heading">All Users</h2>
+      <table className="user-table">
         <thead>
           <tr>
             <th>Username</th>
@@ -48,7 +49,7 @@ const AdminView = () => {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>
-                <button onClick={() => deleteUser(user.user_id)}>Delete User</button>
+                <button className="delete-button" onClick={() => deleteUser(user.user_id)}>Delete User</button>
               </td>
             </tr>
           ))}
