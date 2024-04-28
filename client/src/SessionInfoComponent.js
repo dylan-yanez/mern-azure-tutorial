@@ -14,6 +14,7 @@ const SessionInfoComponent = () => {
   
         // Set the userId state based on the response data
         setUserId(response.data.userId);
+        console.log(response.data.userId)
       } catch (error) {
         console.error('Error fetching session info:', error);
       }
@@ -26,8 +27,7 @@ const SessionInfoComponent = () => {
   
     return (
       <div>
-        <h2>Session Info</h2>
-        <p>User ID: {userId === null ? 'Not set' : userId}</p>
+        <p>User Type: {userId === undefined ? 'Free Listener :)' : 'TuneVista Member :)'}</p>
       </div>
     );
   };
