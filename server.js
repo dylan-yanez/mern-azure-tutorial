@@ -361,11 +361,23 @@ app.post('/api/playlists', async (req, res) => {
   }
 });
 
+// Endpoint to check if the user is an admin
+app.get('/api/checkadmin', async (req, res) => {
+  try {
+    const isAdmin = req.session.isAdmin;
+    res.status(200).json({ isAdmin }); // Send back the isAdmin status
+  } catch (error) {
+    console.error('Error checking admin status:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 
 
 app.post('/logindetails', async (req, res) => {
-  const { username, password } = req.body; // Change email to username
+  const { username, password } = req.body; 
 
   try {
     // Check if the user exists in the database
@@ -389,7 +401,7 @@ app.post('/logindetails', async (req, res) => {
     // Store the user ID in the session
     req.session.userId = user.rows[0].user_id;
     req.session.isAdmin = user.rows[0].is_admin;
-    //console.log(req.session);
+    console.log(req.session);
 
     res.cookie('sessionId', req.session.id, {
       maxAge: 1 * 60 * 60 * 1000, // Same expiration time as session
