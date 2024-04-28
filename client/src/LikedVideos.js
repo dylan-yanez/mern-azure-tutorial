@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './LikedVideos.css'; // Import CSS file for styling
+import baseUrl from './baseUrl'; // Import baseUrl
+import './LikedVideos.css';
 
 const LikedVideos = () => {
   const [likedVideos, setLikedVideos] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch liked videos data from the server
     const fetchLikedVideos = async () => {
       try {
-        const response = await axios.get('/likedvideos'); // Adjust the endpoint accordingly
+        const response = await axios.get(`${baseUrl}/likedvideos`); // Adjust the endpoint with baseUrl
         setLikedVideos(response.data);
       } catch (error) {
         console.error('Error fetching liked videos:', error);
@@ -20,26 +19,22 @@ const LikedVideos = () => {
     };
 
     fetchLikedVideos();
+  }, []);
 
-    // Check login status
+  useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.post('/checklogin');
-        setIsLoggedIn(response.data.isLoggedIn);
+        const response = await axios.post(`${baseUrl}/checklogin`); // Adjust the endpoint with baseUrl
+        if (!response.data.isLoggedIn) {
+          navigate('/profile');
+        }
       } catch (error) {
         console.error('Error checking login status:', error);
       }
     };
 
     checkLoginStatus();
-  }, []);
-
-  // Redirect to login if not logged in
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/profile');
-    }
-  }, [isLoggedIn, navigate]);
+  }, [navigate]);
 
   return (
     <div className="liked-videos-container">

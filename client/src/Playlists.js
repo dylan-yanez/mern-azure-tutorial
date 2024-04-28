@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Playlists.css';
 import PlaylistForm from './PlaylistForm';
 import DeletePlaylistButton from './DeletePlaylistButton';
 import baseUrl from './baseUrl';
+import './Playlists.css';
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState([]);
   const [isEmpty, setIsEmpty] = useState(true);
   const [showPlaylistForm, setShowPlaylistForm] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -26,18 +25,20 @@ const Playlists = () => {
 
     fetchPlaylists();
 
-    // Check login status
+    // Redirect to login if not logged in
     const checkLoginStatus = async () => {
       try {
         const response = await axios.post(`${baseUrl}/checklogin`);
-        setIsLoggedIn(response.data.isLoggedIn);
+        if (!response.data.isLoggedIn) {
+          navigate('/profile');
+        }
       } catch (error) {
         console.error('Error checking login status:', error);
       }
     };
 
     checkLoginStatus();
-  }, []);
+  }, [navigate]);
 
   const handleCreatePlaylist = async (playlistData) => {
     try {
@@ -55,13 +56,6 @@ const Playlists = () => {
     const updatedPlaylists = playlists.filter(playlist => playlist.id !== deletedPlaylistId);
     setPlaylists(updatedPlaylists);
   };
-
-  useEffect(() => {
-    // Redirect to login if not logged in
-    if (!isLoggedIn) {
-      navigate('/profile');
-    }
-  }, [isLoggedIn, navigate]);
 
   return (
     <div className="playlists-wrapper">
@@ -82,10 +76,7 @@ const Playlists = () => {
             <div className="playlist-container">
               {playlists.map((playlist) => (
                 <div key={playlist.id} className="playlist-item">
-                  <Link
-                    to={`/playlist/${playlist.id}`} // Redirect to playlist page
-                    className="playlist-link"
-                  >
+                  <Link to={`/playlist/${playlist.id}`} className="playlist-link">
                     <img src="https://i.ytimg.com/vi/NaZeslUINF4/mqdefault.jpg" alt={playlist.name} />
                     <h3>{playlist.name}</h3>
                   </Link>
