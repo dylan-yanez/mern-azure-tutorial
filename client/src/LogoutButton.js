@@ -1,12 +1,8 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Home.css'; // css file for styling
-import SearchTool from './SearchTool';
-import PopularTikTokSongs from './PopularTikTokSongs';
-import OneheartSection from './OneheartSection';
-import baseUrl from "./baseUrl"; // Import baseUrl
+import baseUrl from "./baseUrl";
 
-const Home = () => {
+const LogoutButton = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -23,47 +19,25 @@ const Home = () => {
     checkLoggedIn();
   }, []);
 
-  return (
-    <div className="image-wrapper">
-      <div className="home-container">
-        <header>
-          <h1 className="title">Welcome to TuneVista</h1>
-          <nav>
-            <ul className="nav-links">
-              {/* Add navigation links if needed */}
-            </ul>
-          </nav>
-          <Fragment>
-            <SearchTool />
-          </Fragment>
-        </header>
-        <main>
-          {/* Conditionally render the main section based on login status */}
-          {!isLoggedIn && (
-            <section className="main-section">
-              <h2 className="section-heading">Discover and Enjoy Music!</h2>
-              <p className="section-text">Explore a vast collection of songs from various genres. Create playlists, save your favorite tracks, and enjoy a seamless music listening experience.</p>
-              <button className="cta-button">Get Started</button>
-            </section>
-          )}
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${baseUrl}/logout`);
+      setIsLoggedIn(false); // Update the state to reflect logout
+      // Perform any additional actions after logout if needed
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
 
-          {/* Popular TikTok Songs Section */}
-          <section className="popular-tiktok-songs">
-            <h2 style={{ color: 'white' }}>Belgium's biggest star Damso</h2>
-            <PopularTikTokSongs />
-          </section>
-          {/* Popular Slowed and Reverb Songs Section */}
-          <section className="popular-tiktok-songs">
-            <h2 style={{ color: 'white' }}>Best of Oneheart and others</h2>
-            <OneheartSection />
-          </section>
-        </main>
-        <footer>
-          <p className="footer-text">&copy; 2024 TuneVista. All rights reserved.</p>
-        </footer>
-      </div>
+  return (
+    <div>
+      {isLoggedIn ? (
+        <button onClick={handleLogout}>Logout</button>
+      ) : (
+        <span style={{ color: 'red' }}>Not logged in</span>
+      )}
     </div>
   );
-}
+};
 
-export default Home;
+export default LogoutButton;
