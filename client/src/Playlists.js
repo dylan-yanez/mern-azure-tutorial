@@ -66,7 +66,7 @@ const Playlists = () => {
                     to={`/playlist/${playlist.id}`} // Navigate to playlist songs component
                     className="playlist-link"
                   >
-                    <img src="https://i.ytimg.com/an_webp/NaZeslUINF4/mqdefault_6s.webp?du=3000&sqp=CLrZsrEG&rs=AOn4CLAHRCDiKt1V9xN7eJggalIzXWDDJA" alt={playlist.name} />
+                    <img src="https://i.ytimg.com/vi/NaZeslUINF4/mqdefault.jpg" alt={playlist.name} />
                     <h3>{playlist.name}</h3>
                   </Link>
                   <DeletePlaylistButton playlistId={playlist.id} onDelete={handleDeletePlaylist} />

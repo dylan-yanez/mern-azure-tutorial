@@ -41,6 +41,101 @@ app.post('/checklogin', (req, res) => {
   res.status(200).json({ isLoggedIn });
 });
 
+app.get('/api/users', async (req, res) => {
+  try {
+    // Query all users from the database
+    const users = await pool.query('SELECT id, username, email FROM users');
+
+    // Send the list of users as a response
+    res.status(200).json(users.rows);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+app.delete('/api/users/:userId/playlists', async (req, res) => {
+  const { userId } = req.params;
+
+  // Check if the user is an admin
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ message: 'You are not authorized to perform this action' });
+  }
+
+  try {
+    // Delete all songs created by the user
+    await pool.query(
+      'DELETE FROM playlist_songs WHERE created_by = $1',
+      [userId]
+    );
+
+    // Delete all playlists created by the user
+    await pool.query(
+      'DELETE FROM playlists WHERE creator_id = $1',
+      [userId]
+    );
+
+    res.status(200).json({ message: 'User playlists and associated songs deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user playlists:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.delete('/api/users/:userId/liked-songs', async (req, res) => {
+  const { userId } = req.params;
+
+  // Check if the user is an admin
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ message: 'You are not authorized to perform this action' });
+  }
+
+  try {
+    // Delete all liked songs by the user
+    await pool.query(
+      'DELETE FROM likes WHERE user_id = $1',
+      [userId]
+    );
+
+    res.status(200).json({ message: 'User liked songs deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user liked songs:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.delete('/api/users/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  // Check if the user is an admin
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ message: 'You are not authorized to perform this action' });
+  }
+
+  try {
+    // Call the delete user playlists endpoint
+    await axios.delete(`${baseUrl}/api/users/${userId}/playlists`);
+
+    // Call the delete user liked songs endpoint
+    await axios.delete(`${baseUrl}/api/users/${userId}/liked-songs`);
+
+    // Delete the user
+    await pool.query(
+      'DELETE FROM users WHERE user_id = $1',
+      [userId]
+    );
+
+    res.status(200).json({ message: 'User and associated data deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user and associated data:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+
+
 // Endpoint to log out the user
 app.post('/logout', (req, res) => {
   // Clear the session
@@ -293,7 +388,8 @@ app.post('/logindetails', async (req, res) => {
 
     // Store the user ID in the session
     req.session.userId = user.rows[0].user_id;
-    console.log(req.session);
+    req.session.isAdmin = user.rows[0].is_admin;
+    //console.log(req.session);
 
     res.cookie('sessionId', req.session.id, {
       maxAge: 1 * 60 * 60 * 1000, // Same expiration time as session
@@ -334,7 +430,8 @@ app.post('/signupdetails', async (req, res) => {
     );
 
     // Store the user ID in the session
-    req.session.userId = newUser.rows[0].id;
+    //req.session.userId = newUser.rows[0].id; // probably wont work edited out because users still need to login
+    
 
     // Send a success response with the newly created user
     //res.status(201).json(newUser.rows[0]);

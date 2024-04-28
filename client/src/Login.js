@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import './Login.css';
+import axios from 'axios'; // Import axios
 import baseUrl from "./baseUrl"; // Import baseUrl
 
 const Login = () => {
@@ -14,25 +15,17 @@ const Login = () => {
     // Check if the user is logged in
     const checkLoggedIn = async () => {
       try {
-        const response = await fetch(`${baseUrl}/checklogin`);
-        const responseData = await response.text(); // Read response as text
-        console.log('Response from checklogin:', responseData); // Log response data
-        if (response.ok) {
-          const data = await response.json();
-          if (data.isLoggedIn) {
-            navigate('/settings');
-          }
-        } else {
-          throw new Error('Failed to check login status');
+        const response = await axios.post(`${baseUrl}/checklogin`);
+        if (response.data.isLoggedIn) {
+          navigate('/settings');
         }
       } catch (error) {
         console.error('Error checking login status:', error);
       }
     };
-  
+
     checkLoggedIn();
   }, [navigate]); // Include navigate in the dependency array
-  
 
   const handleLogin = async (e) => {
     e.preventDefault();
