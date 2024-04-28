@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import './Login.css';
+import axios from 'axios'; // Import axios
 import baseUrl from "./baseUrl"; // Import baseUrl
 
 const Login = () => {
@@ -9,6 +10,22 @@ const Login = () => {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState(''); // Add successMessage state
   const navigate = useNavigate(); // Initialize useNavigate
+
+  useEffect(() => {
+    // Check if the user is logged in
+    const checkLoggedIn = async () => {
+      try {
+        const response = await axios.post(`${baseUrl}/checklogin`);
+        if (response.data.isLoggedIn) {
+          navigate('/settings');
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+    };
+
+    checkLoggedIn();
+  }, [navigate]); // Include navigate in the dependency array
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,7 +48,7 @@ const Login = () => {
       console.log('User logged in successfully:', userData);
       setSuccessMessage('Successfully logged in!'); // Set success message
       setError(''); // Clear error message
-      // Optionally, you can redirect the user to another page or perform any necessary actions upon successful login
+      navigate('/settings'); // Redirect to settings on successful login
     } catch (error) {
       console.error('Error logging in:', error.message);
       setError('Invalid username or password. Please try again.');

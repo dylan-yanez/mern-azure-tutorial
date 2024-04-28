@@ -36,6 +36,163 @@ app.use(session({
 
 const apiKey = process.env.Api_Key_YT;
 
+app.post('/checklogin', (req, res) => {
+  const isLoggedIn = req.session.userId ? true : false;
+  res.status(200).json({ isLoggedIn });
+});
+
+app.get('/api/users', async (req, res) => {
+  try {
+    // Query all users from the database
+    const users = await pool.query('SELECT user_id, username, email FROM users');
+
+    // Send the list of users as a response
+    res.status(200).json(users.rows);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+/*
+app.delete('/api/users/:userId/playlists', async (req, res) => {
+  const { userId } = req.params;
+
+  // Check if the user is an admin
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ message: 'You are not authorized to perform this action' });
+  }
+
+  try {
+    // Delete all songs created by the user
+    await pool.query(
+      'DELETE FROM playlist_songs WHERE user_id = $1',
+      [userId]
+    );
+
+    // Delete all playlists created by the user
+    await pool.query(
+      'DELETE FROM playlists WHERE creator_id = $1',
+      [userId]
+    );
+
+    res.status(200).json({ message: 'User playlists and associated songs deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user playlists:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.delete('/api/users/:userId/liked-songs', async (req, res) => {
+  const { userId } = req.params;
+
+  // Check if the user is an admin
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ message: 'You are not authorized to perform this action' });
+  }
+
+  try {
+    // Delete all liked songs by the user
+    await pool.query(
+      'DELETE FROM likes WHERE user_id = $1',
+      [userId]
+    );
+
+    res.status(200).json({ message: 'User liked songs deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user liked songs:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}); 
+
+app.delete('/api/users/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  // Check if the user is an admin
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ message: 'You are not authorized to perform this action' });
+  }
+
+  try {
+    // Call the delete user playlists endpoint
+    await axios.delete(`/api/users/${userId}/playlists`);
+
+    // Call the delete user liked songs endpoint
+    await axios.delete(`/api/users/${userId}/liked-songs`);
+
+    // Delete the user
+    await pool.query(
+      'DELETE FROM users WHERE user_id = $1',
+      [userId]
+    );
+
+    res.status(200).json({ message: 'User and associated data deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user and associated data:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}); */
+
+app.delete('/api/users/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  // Check if the user is an admin
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ message: 'You are not authorized to perform this action' });
+  }
+
+  try {
+    // Delete all songs created by the user
+    await pool.query(
+      'DELETE FROM playlist_songs WHERE user_id = $1',
+      [userId]
+    );
+
+    // Delete all playlists created by the user
+    await pool.query(
+      'DELETE FROM playlists WHERE creator_id = $1',
+      [userId]
+    );
+
+    // Delete all liked songs by the user
+    await pool.query(
+      'DELETE FROM likes WHERE user_id = $1',
+      [userId]
+    );
+
+    // Delete the user
+    await pool.query(
+      'DELETE FROM users WHERE user_id = $1',
+      [userId]
+    );
+
+    res.status(200).json({ message: 'User and associated data deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user and associated data:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+
+
+
+// Endpoint to log out the user
+app.post('/logout', (req, res) => {
+  // Clear the session
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      res.status(500).json({ message: 'Internal server error' });
+    } else {
+      // Clear the session cookie
+      res.clearCookie('sessionId');
+      res.status(200).json({ message: 'User logged out successfully' });
+    }
+  });
+});
+
+
 app.delete('/api/playlists/:playlistId/songs/:songId', async (req, res) => {
   const { playlistId, songId } = req.params;
   const userId = req.session.userId; // Assuming user ID is stored in session
@@ -245,11 +402,23 @@ app.post('/api/playlists', async (req, res) => {
   }
 });
 
+// Endpoint to check if the user is an admin
+app.get('/api/checkadmin', async (req, res) => {
+  try {
+    const isAdmin = req.session.isAdmin;
+    res.status(200).json({ isAdmin }); // Send back the isAdmin status
+  } catch (error) {
+    console.error('Error checking admin status:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 
 
 app.post('/logindetails', async (req, res) => {
-  const { username, password } = req.body; // Change email to username
+  const { username, password } = req.body; 
 
   try {
     // Check if the user exists in the database
@@ -272,6 +441,7 @@ app.post('/logindetails', async (req, res) => {
 
     // Store the user ID in the session
     req.session.userId = user.rows[0].user_id;
+    req.session.isAdmin = user.rows[0].is_admin;
     console.log(req.session);
 
     res.cookie('sessionId', req.session.id, {
@@ -313,7 +483,8 @@ app.post('/signupdetails', async (req, res) => {
     );
 
     // Store the user ID in the session
-    req.session.userId = newUser.rows[0].id;
+    //req.session.userId = newUser.rows[0].id; // probably wont work edited out because users still need to login
+    
 
     // Send a success response with the newly created user
     //res.status(201).json(newUser.rows[0]);
