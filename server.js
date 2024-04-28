@@ -36,6 +36,27 @@ app.use(session({
 
 const apiKey = process.env.Api_Key_YT;
 
+app.post('/checklogin', (req, res) => {
+  const isLoggedIn = req.session.userId ? true : false;
+  res.status(200).json({ isLoggedIn });
+});
+
+// Endpoint to log out the user
+app.post('/logout', (req, res) => {
+  // Clear the session
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      res.status(500).json({ message: 'Internal server error' });
+    } else {
+      // Clear the session cookie
+      res.clearCookie('sessionId');
+      res.status(200).json({ message: 'User logged out successfully' });
+    }
+  });
+});
+
+
 app.delete('/api/playlists/:playlistId/songs/:songId', async (req, res) => {
   const { playlistId, songId } = req.params;
   const userId = req.session.userId; // Assuming user ID is stored in session
