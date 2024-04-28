@@ -114,7 +114,7 @@ const VideoPlayerPage = () => {
         </div>
         {/* Title */}
         <div className="video-title">
-          <h1>{title}</h1>
+          <h1 className ="videotitlesmall">{title}</h1>
           <img src={thumbnail} alt="Thumbnail" className="video-thumbnail" />
         </div>
         <div className="video-player-wrapper">

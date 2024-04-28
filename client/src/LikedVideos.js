@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import axios from 'axios';
 import './LikedVideos.css'; // Import CSS file for styling
 
 const LikedVideos = () => {
   const [likedVideos, setLikedVideos] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     // Fetch liked videos data from the server
@@ -18,7 +20,26 @@ const LikedVideos = () => {
     };
 
     fetchLikedVideos();
+
+    // Check login status
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.post('/checklogin');
+        setIsLoggedIn(response.data.isLoggedIn);
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+    };
+
+    checkLoginStatus();
   }, []);
+
+  // Redirect to login if not logged in
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/profile');
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className="liked-videos-container">

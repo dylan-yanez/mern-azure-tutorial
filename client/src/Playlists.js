@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import axios from 'axios';
 import './Playlists.css';
 import PlaylistForm from './PlaylistForm';
-import DeletePlaylistButton from './DeletePlaylistButton'; // Import the new button component
+import DeletePlaylistButton from './DeletePlaylistButton';
 import baseUrl from './baseUrl';
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState([]);
   const [isEmpty, setIsEmpty] = useState(true);
   const [showPlaylistForm, setShowPlaylistForm] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -23,6 +25,18 @@ const Playlists = () => {
     };
 
     fetchPlaylists();
+
+    // Check login status
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.post(`${baseUrl}/checklogin`);
+        setIsLoggedIn(response.data.isLoggedIn);
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+    };
+
+    checkLoginStatus();
   }, []);
 
   const handleCreatePlaylist = async (playlistData) => {
@@ -38,10 +52,16 @@ const Playlists = () => {
   };
 
   const handleDeletePlaylist = (deletedPlaylistId) => {
-    // Filter out the deleted playlist from the playlists array
     const updatedPlaylists = playlists.filter(playlist => playlist.id !== deletedPlaylistId);
     setPlaylists(updatedPlaylists);
   };
+
+  useEffect(() => {
+    // Redirect to login if not logged in
+    if (!isLoggedIn) {
+      navigate('/profile');
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className="playlists-wrapper">
@@ -63,7 +83,7 @@ const Playlists = () => {
               {playlists.map((playlist) => (
                 <div key={playlist.id} className="playlist-item">
                   <Link
-                    to={`/playlist/${playlist.id}`} // Navigate to playlist songs component
+                    to={`/playlist/${playlist.id}`} // Redirect to playlist page
                     className="playlist-link"
                   >
                     <img src="https://i.ytimg.com/vi/NaZeslUINF4/mqdefault.jpg" alt={playlist.name} />
