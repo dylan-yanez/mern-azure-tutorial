@@ -1,20 +1,22 @@
 /* Home.css */
-.image-wrapper{
-  background-image: url('../assets/waves.jpg');
+.image-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../assets/waves.jpg');
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  width: 100vw; /* Set width to full viewport width */
-  height: 100vh; /* Set height to full viewport height */
+  overflow-y: auto; /* Allow vertical scrolling */
 }
-/* Container styles */
+
 .home-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Set minimum height to full viewport height */
+  min-height: 100%;
+  padding-top: 100vh; /* Adjust the top padding to account for the fixed image wrapper */
 }
 
 /* Header styles */

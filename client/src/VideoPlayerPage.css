@@ -58,11 +58,9 @@
 }
 
 .video-thumbnail {
-  max-height: 350px;
-  max-width: 500px;
-  height: auto;
-  width: auto;
-  margin: 0 auto;
+  width: 200px; /* Set the width to your desired size */
+  height: 450px; /* Set the height to your desired size */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
 }
 
 /* Button */
