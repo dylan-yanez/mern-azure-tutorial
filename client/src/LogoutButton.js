@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import baseUrl from "./baseUrl";
 
 const LogoutButton = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate(); // Get the navigate function
 
   useEffect(() => {
     // Check if the user is logged in
@@ -23,6 +25,7 @@ const LogoutButton = () => {
     try {
       await axios.post(`${baseUrl}/logout`);
       setIsLoggedIn(false); // Update the state to reflect logout
+      navigate('/'); // Redirect to the homepage
       // Perform any additional actions after logout if needed
     } catch (error) {
       console.error('Error logging out:', error);

@@ -28,10 +28,11 @@
   margin-top: 20px;
 }
 
-.video-title h1 {
-  max-width: 80%;
+.videotitlesmall {
   font-size: 28px;
+  text-align: center;
 }
+
 
 .video-thumbnail {
   width: 200px;
@@ -131,11 +132,6 @@
   width: 15%;
   background: rgba(255, 255, 255, 0);
   border-radius: 20px;
+  margin-top: 20px; /* Add margin to create space between the controls and the DiscoverSong */
 }
 
-.discover-song {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  margin-right: auto;
-}
