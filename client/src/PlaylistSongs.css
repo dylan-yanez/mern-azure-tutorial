@@ -10,13 +10,13 @@
 }
 
 .song-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  justify-content: center; /* Center the grid horizontally */
-  align-items: center; /* Center the grid vertically */
+  display: flex;
+  flex-wrap: wrap; /* Allow flex items to wrap to the next row */
+  justify-content: center; /* Center the items horizontally */
+  gap: 20px; /* Add some space between items */
   margin-top: 20px; /* Add some margin at the top for spacing */
 }
+
 
 .song-card {
   background-color: #f0f0f0;
