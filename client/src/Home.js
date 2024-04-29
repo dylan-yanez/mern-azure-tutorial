@@ -5,6 +5,9 @@ import './Home.css'; // css file for styling
 import SearchTool from './SearchTool';
 import PopularTikTokSongs from './PopularTikTokSongs';
 import OneheartSection from './OneheartSection';
+import SlowedAndReverb from './SlowedAndReverb';
+import MashupMusic from './MashupMusic';
+import MoodMelodies from './MoodMelodies';
 import baseUrl from "./baseUrl"; // Import baseUrl
 
 const Home = () => {
@@ -50,14 +53,26 @@ const Home = () => {
 
           {/* Popular TikTok Songs Section */}
           <section className="popular-tiktok-songs">
-            <h2 style={{ color: 'white' }}>Belgium's biggest star Damso</h2>
-            <PopularTikTokSongs />
+            <h2 style={{ color: 'white' }}>Mashup Music</h2>
+            <MashupMusic />
           </section>
-          {/* Popular Slowed and Reverb Songs Section */}
+          <section className="popular-tiktok-songs">
+            <h2 style={{ color: 'white' }}>Slowed and Reverb</h2>
+            <SlowedAndReverb />
+          </section>
+          <section className="popular-tiktok-songs">
+            <h2 style={{ color: 'white' }}>Mood Melodies</h2>
+            <MoodMelodies />
+          </section>
           <section className="popular-tiktok-songs">
             <h2 style={{ color: 'white' }}>Best of Oneheart and others</h2>
             <OneheartSection />
           </section>
+          <section className="popular-tiktok-songs">
+            <h2 style={{ color: 'white' }}>Belgium's biggest star Damso (FR)</h2>
+            <PopularTikTokSongs />
+          </section>
+          
         </main>
         <footer>
           <p className="footer-text">&copy; 2024 TuneVista. All rights reserved.</p>
