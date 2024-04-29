@@ -172,7 +172,7 @@ const VideoPlayerPage = () => {
         </div>
         <br></br>
         <div className="discover-song-container">
-        <h4>Discover a Song</h4>
+        <h4>Featured Songs</h4>
           <div className="discover-song">
             {/* Discover a New Song Here */}
             {videoId && <DiscoverSong />}
